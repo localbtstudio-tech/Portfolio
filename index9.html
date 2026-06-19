@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VisionCare Eye Clinic — premium ophthalmology, LASIK, cataract care, eye exams, and eyewear." />
+  <title>VisionCare Eye Clinic</title>
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f7fafc;
+      --ink: #0f172a;
+      --muted: #475569;
+      --teal: #0d9488;
+      --teal-2: #14b8a6;
+      --navy: #0f172a;
+      --card: rgba(255,255,255,.84);
+      --border: rgba(15, 23, 42, 0.08);
+      --shadow: 0 24px 60px rgba(15,23,42,.12);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(20, 184, 166, .10), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(14, 165, 233, .08), transparent 28%),
+        var(--bg);
+      color: var(--ink);
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Source Serif 4', serif;
+    }
+
+    .container-shell { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
+    .glass {
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .hero-overlay {
+      background: linear-gradient(135deg, rgba(2,6,23,.78), rgba(2,6,23,.45));
+    }
+    .soft-shadow { box-shadow: 0 18px 40px rgba(15,23,42,.10); }
+    .lift {
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    }
+    .lift:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(15,23,42,.14); }
+    .fade-up { opacity: 0; transform: translateY(18px); animation: fadeUp .8s ease forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .delay-1 { animation-delay: .12s; }
+    .delay-2 { animation-delay: .24s; }
+    .delay-3 { animation-delay: .36s; }
+    .delay-4 { animation-delay: .48s; }
+    .delay-5 { animation-delay: .6s; }
+
+    .nav-link {
+      position: relative;
+      color: rgba(255,255,255,.85);
+      transition: .2s ease;
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: #5eead4;
+      transition: width .25s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .section-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.1;
+    }
+    .section-kicker {
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      padding: .95rem 1.4rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--teal), var(--teal-2));
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 14px 30px rgba(13, 148, 136, .28);
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 34px rgba(13, 148, 136, .35); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      padding: .95rem 1.4rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      color: white;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,.18);
+      transition: .2s ease;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,.18); }
+
+    .menu-panel {
+      display: none;
+    }
+    .menu-panel.open {
+      display: block;
+    }
+
+    .counter-number { font-variant-numeric: tabular-nums; }
+
+    .faq-btn[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
+    .faq-panel { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+
+    .floating-whatsapp, .floating-top {
+      position: fixed;
+      right: 18px;
+      z-index: 60;
+      width: 54px;
+      height: 54px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 16px 35px rgba(15,23,42,.22);
+    }
+    .floating-whatsapp { bottom: 18px; background: #25D366; color: white; }
+    .floating-top { bottom: 82px; background: white; color: var(--navy); border: 1px solid rgba(15,23,42,.1); }
+
+    .input {
+      width: 100%;
+      padding: .95rem 1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(15,23,42,.12);
+      background: rgba(255,255,255,.82);
+      outline: none;
+      transition: .2s ease;
+    }
+    .input:focus {
+      border-color: rgba(13,148,136,.55);
+      box-shadow: 0 0 0 4px rgba(13,148,136,.12);
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top bar -->
+  <div class="w-full bg-slate-950 text-slate-200 text-sm">
+    <div class="container-shell py-2 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+      <div class="flex flex-wrap items-center gap-4">
+        <span class="inline-flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> Tunis, Tunisia</span>
+        <span class="inline-flex items-center gap-2"><i data-lucide="clock-3" class="w-4 h-4"></i> Sun–Thu: 9:00 AM – 6:00 PM</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-4">
+        <a href="tel:+21600000000" class="inline-flex items-center gap-2 hover:text-white transition"><i data-lucide="phone" class="w-4 h-4"></i> +216 97 382 032</a>
+        <a href="mailto:localbtstudio@gmail.com" class="inline-flex items-center gap-2 hover:text-white transition"><i data-lucide="mail" class="w-4 h-4"></i> localbtstudio@gmail.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Hero -->
+  <header class="relative min-h-screen overflow-hidden">
+    <img src="https://images.pexels.com/photos/865711/pexels-photo-865711.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Macro eye image" class="absolute inset-0 w-full h-full object-cover" loading="eager">
+    <div class="absolute inset-0 hero-overlay"></div>
+
+    <nav class="relative z-20">
+      <div class="container-shell py-5 flex items-center justify-between gap-4">
+        <a href="#home" class="flex items-center gap-3 text-white">
+          <div class="w-11 h-11 rounded-2xl bg-white/10 border border-white/15 grid place-items-center backdrop-blur-md">
+            <i data-lucide="eye" class="w-6 h-6 text-teal-300"></i>
+          </div>
+          <div>
+            <div class="text-2xl md:text-[2rem] font-bold leading-none">VisionCare</div>
+            <div class="text-xs uppercase tracking-[.22em] text-white/65 mt-1">Eye Clinic</div>
+          </div>
+        </a>
+
+        <div class="desktop-nav hidden md:flex items-center gap-8 text-sm font-medium">
+          <a href="#services" class="nav-link">Services</a>
+          <a href="#why" class="nav-link">Why Us</a>
+          <a href="#doctor" class="nav-link">Doctor</a>
+          <a href="#testimonials" class="nav-link">Reviews</a>
+          <a href="#booking" class="btn-secondary px-5 py-2.5">Book Appointment</a>
+        </div>
+
+        <button id="menuBtn" class="md:hidden text-white p-3 rounded-xl bg-white/10 border border-white/10" aria-label="Open menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <div id="menuPanel" class="menu-panel md:hidden container-shell">
+        <div class="glass rounded-3xl p-4 mt-2 text-slate-900">
+          <div class="grid gap-2 text-sm font-medium">
+            <a href="#services" class="py-3 px-4 rounded-2xl hover:bg-slate-100">Services</a>
+            <a href="#why" class="py-3 px-4 rounded-2xl hover:bg-slate-100">Why Us</a>
+            <a href="#doctor" class="py-3 px-4 rounded-2xl hover:bg-slate-100">Doctor</a>
+            <a href="#testimonials" class="py-3 px-4 rounded-2xl hover:bg-slate-100">Reviews</a>
+            <a href="#booking" class="py-3 px-4 rounded-2xl hover:bg-slate-100">Book Appointment</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div id="home" class="relative z-10 container-shell pt-16 md:pt-24 pb-24 flex items-center min-h-[calc(100vh-84px)]">
+      <div class="max-w-3xl text-white">
+        <p class="fade-up delay-1 text-teal-300 uppercase tracking-[.28em] text-xs md:text-sm font-semibold">Premium Eye Care</p>
+        <h1 class="fade-up delay-2 text-5xl md:text-7xl font-bold leading-tight mt-4">Clarity You Can See, Care You Can Trust</h1>
+        <p class="fade-up delay-3 mt-6 text-slate-200 text-lg md:text-xl max-w-2xl leading-relaxed">Advanced ophthalmology, LASIK, cataract care, comprehensive eye exams, and premium eyewear — delivered with precision and a personal touch.</p>
+        <div class="fade-up delay-4 mt-10 flex flex-col sm:flex-row gap-4">
+          <a href="#booking" class="btn-primary"><i data-lucide="calendar-days" class="w-5 h-5"></i> Schedule Your Visit</a>
+          <a href="#services" class="btn-secondary"><i data-lucide="sparkles" class="w-5 h-5"></i> Explore Services</a>
+        </div>
+
+        <div class="fade-up delay-5 mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl">
+          <div class="glass rounded-3xl p-5 text-center">
+            <div class="text-3xl font-bold text-white counter-number">15+</div>
+            <div class="text-sm text-black/75 mt-1">Years Experience</div>
+          </div>
+          <div class="glass rounded-3xl p-5 text-center">
+            <div class="text-3xl font-bold text-white counter-number">12K+</div>
+            <div class="text-sm text-black/75 mt-1">Patients Helped</div>
+          </div>
+          <div class="glass rounded-3xl p-5 text-center">
+            <div class="text-3xl font-bold text-white counter-number">98%</div>
+            <div class="text-sm text-black/75 mt-1">Satisfaction</div>
+          </div>
+          <div class="glass rounded-3xl p-5 text-center">
+            <div class="text-3xl font-bold text-white counter-number">24/7</div>
+            <div class="text-sm text-black/75 mt-1">Support</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Services -->
+    <section id="services" class="py-24">
+      <div class="container-shell">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <div class="section-kicker">What We Offer</div>
+          <h2 class="section-title mt-3">Our Specialised Services</h2>
+          <p class="text-slate-600 mt-5 text-lg">Everything from diagnosis to treatment and visual correction, designed to preserve and improve your sight.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-7">
+          <article class="glass rounded-[28px] overflow-hidden lift">
+            <img src="https://images.pexels.com/photos/33857829/pexels-photo-33857829.jpeg?auto=compress&cs=tinysrgb&w=1200" class="w-full h-56 object-cover" alt="LASIK procedure" loading="lazy">
+            <div class="p-7">
+              <div class="w-14 h-14 rounded-2xl bg-teal-50 text-teal-700 grid place-items-center mb-5"><i data-lucide="scan-eye" class="w-7 h-7"></i></div>
+              <h3 class="text-2xl font-bold">LASIK Surgery</h3>
+              <p class="mt-3 text-slate-600 leading-relaxed">State-of-the-art laser vision correction to reduce dependence on glasses and contact lenses.</p>
+            </div>
+          </article>
+
+          <article class="glass rounded-[28px] overflow-hidden lift">
+            <img src="https://images.pexels.com/photos/5752289/pexels-photo-5752289.jpeg?auto=compress&cs=tinysrgb&w=1200" class="w-full h-56 object-cover" alt="Eye exam" loading="lazy">
+            <div class="p-7">
+              <div class="w-14 h-14 rounded-2xl bg-teal-50 text-teal-700 grid place-items-center mb-5"><i data-lucide="stethoscope" class="w-7 h-7"></i></div>
+              <h3 class="text-2xl font-bold">Comprehensive Eye Exam</h3>
+              <p class="mt-3 text-slate-600 leading-relaxed">Detailed evaluation with modern diagnostic tools to detect issues early and protect long-term vision.</p>
+            </div>
+          </article>
+
+          <article class="glass rounded-[28px] overflow-hidden lift">
+            <img src="https://images.pexels.com/photos/9474178/pexels-photo-9474178.jpeg?auto=compress&cs=tinysrgb&w=1200" class="w-full h-56 object-cover" alt="Glasses" loading="lazy">
+            <div class="p-7">
+              <div class="w-14 h-14 rounded-2xl bg-teal-50 text-teal-700 grid place-items-center mb-5"><i data-lucide="glasses" class="w-7 h-7"></i></div>
+              <h3 class="text-2xl font-bold">Premium Eyewear</h3>
+              <p class="mt-3 text-slate-600 leading-relaxed">Designer frames and high-performance lenses selected for comfort, style, and sharp vision.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why choose us -->
+    <section id="why" class="py-24 bg-slate-50/70 border-y border-slate-200/70">
+      <div class="container-shell grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <div class="section-kicker">Why Patients Choose Us</div>
+          <h2 class="section-title mt-3">A modern clinic built around trust, precision, and comfort.</h2>
+          <p class="text-slate-600 mt-5 text-lg leading-relaxed">We combine specialist care, cutting-edge equipment, and a warm patient experience so every visit feels calm, clear, and professional.</p>
+
+          <div class="grid sm:grid-cols-2 gap-4 mt-8">
+            <div class="glass rounded-3xl p-5 lift">
+              <i data-lucide="shield-check" class="w-7 h-7 text-teal-600"></i>
+              <h3 class="font-bold text-xl mt-4">Trusted Safety</h3>
+              <p class="text-slate-600 mt-2">Sterile, modern procedures with patient-first protocols.</p>
+            </div>
+            <div class="glass rounded-3xl p-5 lift">
+              <i data-lucide="badge-check" class="w-7 h-7 text-teal-600"></i>
+              <h3 class="font-bold text-xl mt-4">Expert Doctor</h3>
+              <p class="text-slate-600 mt-2">Experienced ophthalmologist with a patient-centered approach.</p>
+            </div>
+            <div class="glass rounded-3xl p-5 lift">
+              <i data-lucide="scan-line" class="w-7 h-7 text-teal-600"></i>
+              <h3 class="font-bold text-xl mt-4">Advanced Tech</h3>
+              <p class="text-slate-600 mt-2">High-precision diagnostics for reliable treatment planning.</p>
+            </div>
+            <div class="glass rounded-3xl p-5 lift">
+              <i data-lucide="heart-pulse" class="w-7 h-7 text-teal-600"></i>
+              <h3 class="font-bold text-xl mt-4">Personal Care</h3>
+              <p class="text-slate-600 mt-2">Appointments that feel attentive, calm, and reassuring.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid gap-5">
+          <div class="glass rounded-[30px] p-6 lift">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 grid place-items-center shrink-0"><i data-lucide="calendar-check-2" class="w-6 h-6"></i></div>
+              <div>
+                <h3 class="font-bold text-xl">Easy Appointments</h3>
+                <p class="text-slate-600 mt-2">Book by phone, WhatsApp, or the form below.</p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-[30px] p-6 lift">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 grid place-items-center shrink-0"><i data-lucide="award" class="w-6 h-6"></i></div>
+              <div>
+                <h3 class="font-bold text-xl">High Patient Satisfaction</h3>
+                <p class="text-slate-600 mt-2">Comfortable experience and transparent communication at every step.</p>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-[30px] p-6 lift">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 grid place-items-center shrink-0"><i data-lucide="microscope" class="w-6 h-6"></i></div>
+              <div>
+                <h3 class="font-bold text-xl">Clear Treatment Plans</h3>
+                <p class="text-slate-600 mt-2">We explain everything simply, so you know exactly what comes next.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Doctor -->
+    <section id="doctor" class="py-24">
+      <div class="container-shell grid lg:grid-cols-[360px_1fr] gap-12 items-center">
+        <div class="relative mx-auto lg:mx-0">
+          <div class="absolute -inset-3 rounded-full bg-teal-100/70 blur-xl"></div>
+          <img src="https://images.pexels.com/photos/6129573/pexels-photo-6129573.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Doctor" class="relative w-80 h-80 object-cover rounded-full shadow-2xl border-8 border-white" loading="lazy">
+        </div>
+        <div>
+          <div class="section-kicker">Meet Your Specialist</div>
+          <h2 class="section-title mt-3">Dr. Ahmed Al-Mansouri</h2>
+          <p class="text-teal-700 font-semibold text-lg mt-3">Consultant Ophthalmologist & Refractive Surgeon</p>
+          <p class="text-slate-600 mt-5 text-lg leading-relaxed max-w-3xl">With more than 15 years of experience in ophthalmology, Dr. Al-Mansouri specialises in LASIK, cataract surgery, corneal disorders, and detailed vision correction planning. He focuses on careful diagnosis, honest guidance, and excellent outcomes.</p>
+
+          <div class="grid sm:grid-cols-3 gap-4 mt-8">
+            <div class="glass rounded-3xl p-5 text-center lift">
+              <div class="text-3xl font-bold text-teal-700">15+</div>
+              <div class="text-sm text-slate-600 mt-1">Years of practice</div>
+            </div>
+            <div class="glass rounded-3xl p-5 text-center lift">
+              <div class="text-3xl font-bold text-teal-700">4.9★</div>
+              <div class="text-sm text-slate-600 mt-1">Patient rating</div>
+            </div>
+            <div class="glass rounded-3xl p-5 text-center lift">
+              <div class="text-3xl font-bold text-teal-700">12K+</div>
+              <div class="text-sm text-slate-600 mt-1">Consultations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="py-24 bg-slate-50/70 border-y border-slate-200/70">
+      <div class="container-shell">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <div class="section-kicker">Clinic Gallery</div>
+          <h2 class="section-title mt-3">A clean space designed for comfort.</h2>
+          <p class="text-slate-600 mt-5 text-lg">A calm environment, premium equipment, and a polished clinical experience from the moment you arrive.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div class="rounded-[28px] overflow-hidden glass lift">
+            <img src="https://images.pexels.com/photos/4167540/pexels-photo-4167540.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Clinic room" class="w-full h-72 object-cover" loading="lazy">
+            <div class="p-5 font-semibold">Consultation Room</div>
+          </div>
+          <div class="rounded-[28px] overflow-hidden glass lift">
+            <img src="https://images.pexels.com/photos/5752268/pexels-photo-5752268.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Eye testing" class="w-full h-72 object-cover" loading="lazy">
+            <div class="p-5 font-semibold">Vision Testing</div>
+          </div>
+          <div class="rounded-[28px] overflow-hidden glass lift">
+            <img src="https://images.pexels.com/photos/5765832/pexels-photo-5765832.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Modern medical equipment" class="w-full h-72 object-cover" loading="lazy">
+            <div class="p-5 font-semibold">Modern Equipment</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-24">
+      <div class="container-shell">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <div class="section-kicker">Patient Reviews</div>
+          <h2 class="section-title mt-3">Trusted by families across the city.</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="glass rounded-[28px] p-7 lift">
+            <div class="flex items-center gap-1 text-amber-400 mb-4">
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            </div>
+            <p class="text-slate-600 leading-relaxed">“The clinic is beautiful, the staff are kind, and everything was explained clearly. I felt safe from the first minute.”</p>
+            <h3 class="font-bold text-xl mt-6">Sarah Johnson</h3>
+          </article>
+
+          <article class="glass rounded-[28px] p-7 lift">
+            <div class="flex items-center gap-1 text-amber-400 mb-4">
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            </div>
+            <p class="text-slate-600 leading-relaxed">“Excellent doctor, excellent service. My eye exam was thorough and very professional. Highly recommended.”</p>
+            <h3 class="font-bold text-xl mt-6">Emma Brown</h3>
+          </article>
+
+          <article class="glass rounded-[28px] p-7 lift">
+            <div class="flex items-center gap-1 text-amber-400 mb-4">
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            </div>
+            <p class="text-slate-600 leading-relaxed">“The appointment process was easy, and the team took their time to answer all my questions.”</p>
+            <h3 class="font-bold text-xl mt-6">Jessica Miller</h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-24 bg-slate-50/70 border-y border-slate-200/70">
+      <div class="container-shell max-w-4xl">
+        <div class="text-center mb-12">
+          <div class="section-kicker">FAQ</div>
+          <h2 class="section-title mt-3">Common Questions</h2>
+        </div>
+
+        <div class="grid gap-4" id="faqList">
+          <div class="glass rounded-3xl overflow-hidden">
+            <button class="faq-btn w-full text-left p-6 flex items-center justify-between gap-4" aria-expanded="false">
+              <span class="font-bold text-lg">Do I need an appointment?</span>
+              <i data-lucide="plus" class="faq-icon w-5 h-5 transition-transform"></i>
+            </button>
+            <div class="faq-panel px-6 pb-0 text-slate-600 leading-relaxed">
+              <div class="pb-6">Yes. Booking an appointment helps us prepare the right equipment and gives you enough time with the doctor.</div>
+            </div>
+          </div>
+
+          <div class="glass rounded-3xl overflow-hidden">
+            <button class="faq-btn w-full text-left p-6 flex items-center justify-between gap-4" aria-expanded="false">
+              <span class="font-bold text-lg">Do you offer emergency consultations?</span>
+              <i data-lucide="plus" class="faq-icon w-5 h-5 transition-transform"></i>
+            </button>
+            <div class="faq-panel px-6 pb-0 text-slate-600 leading-relaxed">
+              <div class="pb-6">For urgent eye pain, sudden vision loss, or injury, call us immediately so we can advise the next step.</div>
+            </div>
+          </div>
+
+          <div class="glass rounded-3xl overflow-hidden">
+            <button class="faq-btn w-full text-left p-6 flex items-center justify-between gap-4" aria-expanded="false">
+              <span class="font-bold text-lg">Can I book by WhatsApp?</span>
+              <i data-lucide="plus" class="faq-icon w-5 h-5 transition-transform"></i>
+            </button>
+            <div class="faq-panel px-6 pb-0 text-slate-600 leading-relaxed">
+              <div class="pb-6">Yes. Use the WhatsApp button to start a chat instantly with our reception team.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking + Map -->
+    <section id="booking" class="py-24">
+      <div class="container-shell grid lg:grid-cols-2 gap-8 items-stretch">
+        <div class="glass rounded-[32px] p-8 md:p-10">
+          <div class="section-kicker">Book Appointment</div>
+          <h2 class="section-title mt-3">Ready for clearer vision?</h2>
+          <p class="text-slate-600 mt-4 text-lg">Fill out the form and our team will contact you to confirm your visit.</p>
+
+          <form class="grid gap-4 mt-8" onsubmit="event.preventDefault(); alert('Your appointment request has been prepared. Connect this form to your backend or WhatsApp next.');">
+            <div class="grid md:grid-cols-2 gap-4">
+              <input class="input" type="text" placeholder="Full name" required>
+              <input class="input" type="tel" placeholder="Phone number" required>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+              <input class="input" type="email" placeholder="Email address">
+              <input class="input" type="date" required>
+            </div>
+            <select class="input" required>
+              <option value="">Select service</option>
+              <option>Comprehensive Eye Exam</option>
+              <option>LASIK Surgery</option>
+              <option>Premium Eyewear</option>
+              <option>Cataract Consultation</option>
+            </select>
+            <textarea class="input min-h-32" placeholder="Tell us your concern or preferred time..."></textarea>
+            <button class="btn-primary w-full" type="submit"><i data-lucide="send" class="w-5 h-5"></i> Submit Appointment Request</button>
+          </form>
+        </div>
+
+        <div class="grid gap-6">
+          <div class="glass rounded-[32px] p-8">
+            <h3 class="font-bold text-2xl">Visit Us</h3>
+            <p class="text-slate-600 mt-3">Tunis, Tunisia</p>
+            <div class="grid sm:grid-cols-2 gap-4 mt-6">
+              <div class="rounded-3xl bg-slate-50 p-5 border border-slate-200">
+                <div class="flex items-center gap-2 font-bold"><i data-lucide="phone" class="w-4 h-4 text-teal-700"></i> Call</div>
+                <div class="text-slate-600 mt-2">+216 97 382 032</div>
+              </div>
+              <div class="rounded-3xl bg-slate-50 p-5 border border-slate-200">
+                <div class="flex items-center gap-2 font-bold"><i data-lucide="mail" class="w-4 h-4 text-teal-700"></i> Email</div>
+                <div class="text-slate-600 mt-2">hello@visioncare.tn</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass rounded-[32px] overflow-hidden min-h-[360px]">
+            <iframe title="Clinic map" class="w-full h-[360px] md:h-[430px]" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Tunis,Tunisia&z=13&output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-950 text-slate-300 py-12 mt-10">
+    <div class="container-shell grid md:grid-cols-3 gap-8">
+      <div>
+        <div class="flex items-center gap-3 text-white">
+          <div class="w-11 h-11 rounded-2xl bg-white/10 border border-white/10 grid place-items-center"><i data-lucide="eye" class="w-6 h-6 text-teal-300"></i></div>
+          <div>
+            <div class="text-2xl font-bold">VisionCare</div>
+            <div class="text-xs uppercase tracking-[.22em] text-white/50 mt-1">Eye Clinic</div>
+          </div>
+        </div>
+        <p class="mt-4 text-slate-400 leading-relaxed">Premium eye care services with a modern patient experience and a focus on clear communication.</p>
+      </div>
+
+      <div>
+        <h3 class="text-white font-bold text-xl mb-4">Services</h3>
+        <div class="grid gap-2 text-slate-400">
+          <a href="#services" class="hover:text-white transition">LASIK Surgery</a>
+          <a href="#services" class="hover:text-white transition">Eye Exam</a>
+          <a href="#services" class="hover:text-white transition">Premium Eyewear</a>
+          <a href="#booking" class="hover:text-white transition">Book Appointment</a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-white font-bold text-xl mb-4">Quick Contact</h3>
+        <div class="grid gap-2 text-slate-400">
+          <a href="tel:+21697382032" class="hover:text-white transition">+216 97 382 032</a>
+          <a href="mailto:hello@visioncare.tn" class="hover:text-white transition">hello@visioncare.tn</a>
+          <span>Tunis, Tunisia</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-shell border-t border-white/10 mt-10 pt-6 text-center text-sm text-slate-500">
+      © 2024 VisionCare Eye Clinic. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Floating buttons -->
+ <a class="floating-whatsapp"
+   href="https://wa.me/21697382032?text=Hello%20VisionCare,%20I%20would%20like%20to%20book%20an%20appointment."
+   target="_blank">
+    
+    <i data-lucide="message-circle-more" class="w-6 h-6"></i>
+  </a>
+  
+  <button id="toTop" class="floating-top opacity-0 pointer-events-none transition" aria-label="Back to top">
+    <i data-lucide="arrow-up" class="w-6 h-6"></i>
+  </button>
+
+  <script>
+    lucide.createIcons();
+
+    const menuBtn = document.getElementById('menuBtn');
+    const menuPanel = document.getElementById('menuPanel');
+    const toTop = document.getElementById('toTop');
+    const faqButtons = document.querySelectorAll('.faq-btn');
+
+    menuBtn.addEventListener('click', () => {
+      menuPanel.classList.toggle('open');
+    });
+
+    menuPanel.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => menuPanel.classList.remove('open'));
+    });
+
+    faqButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const panel = btn.nextElementSibling;
+        const open = btn.getAttribute('aria-expanded') === 'true';
+
+        faqButtons.forEach(otherBtn => {
+          if (otherBtn !== btn) {
+            otherBtn.setAttribute('aria-expanded', 'false');
+            otherBtn.nextElementSibling.style.maxHeight = null;
+          }
+        });
+
+        btn.setAttribute('aria-expanded', String(!open));
+        panel.style.maxHeight = !open ? panel.scrollHeight + 'px' : null;
+      });
+    });
+
+    const counters = document.querySelectorAll('.counter-number');
+    const countUp = (el, endValue) => {
+      const duration = 1200;
+      const start = performance.now();
+      const animate = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        let value = Math.floor(progress * endValue);
+        if (endValue === 98) el.textContent = `${value}%`;
+        else if (endValue === 15) el.textContent = `${value}+`;
+        else if (endValue === 12000) el.textContent = `${value.toLocaleString()}+`;
+        else if (endValue === 24) el.textContent = `${value}/7`;
+        else el.textContent = value;
+        if (progress < 1) requestAnimationFrame(animate);
+      };
+      requestAnimationFrame(animate);
+    };
+
+    const counterMap = new Map([
+      [counters[0], 15],
+      [counters[1], 12000],
+      [counters[2], 98],
+      [counters[3], 24],
+    ]);
+
+    const counterObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          counterMap.forEach((value, el) => {
+            if (entry.target.contains(el)) countUp(el, value);
+          });
+        }
+      });
+    }, { threshold: 0.35 });
+
+    const heroCountersSection = document.getElementById('home');
+    if (heroCountersSection) counterObserver.observe(heroCountersSection);
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 600) {
+        toTop.classList.remove('opacity-0', 'pointer-events-none');
+      } else {
+        toTop.classList.add('opacity-0', 'pointer-events-none');
+      }
+    });
+
+    toTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
