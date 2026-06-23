@@ -1,5 +1,5 @@
 # 💫 About Me:
-This repository contains my personal portfolio website, showcasing modern and responsive websites built for local businesses.<br><br>Featured projects include:<br><br>- Restaurant Website<br>- Beauty Salon Website<br>- Eye Clinic Website<br><br>Each project focuses on clean design, mobile responsiveness, and creating a professional online presence for businesses.<br><br>View the portfolio here:<br>https://yourusername.github.io/portfolio/
+This repository contains my personal portfolio website, showcasing modern and responsive websites built for local businesses.<br><br>Featured projects include:<br><br>- Restaurant Website<br>- Beauty Salon Website<br>- Eye Clinic Website<br><br>Each project focuses on clean design, mobile responsiveness, and creating a professional online presence for businesses.<br><br>View the portfolio here:<br>https://localbtstudio-tech.github.io/Portfolio/
 
 
 ## 🌐 Socials:
